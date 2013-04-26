@@ -14,7 +14,8 @@
     "winston": "~0.7.1"
   },
   "devDependencies": {
-    "mocha": "~1.9.0"
+    "mocha": "~1.9.0",
+    "chai": "~1.5.0"
   },
   "scripts": {
     "test": "mocha"
