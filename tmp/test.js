@@ -83,6 +83,8 @@ var looperTask = Parsley.task(function looperTask(arg) {
 looperTask();
 taskmessage = looperTask.delay(10);
 
+console.log(module.filename);
+
 
 //var exampleTask = new Task(function(arg) {
 
