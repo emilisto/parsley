@@ -1,6 +1,11 @@
 var Parsley = require('..')
-  , assert = require('assert')
+  , assert = require('chai').assert
 ;
+
+// Disable logging
+Parsley.Logging.config.transports = {
+  console: { level: 'error' }
+};
 
 module.exports = {
 
@@ -19,7 +24,7 @@ module.exports = {
 
     var args = null
     var sampleFn = function() {
-      args = [].concat(arguments);
+      args = [].concat(Array.prototype.slice.call(arguments));
     };
 
     var sampleTask = new Parsley.Task(sampleFn);
@@ -27,7 +32,8 @@ module.exports = {
     action.addArguments('second');
     action.run();
 
-    assert(args.length === 2)
+    assert.include(args, 'first')
+    assert.include(args, 'second')
   }
 
 };
