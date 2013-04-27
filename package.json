@@ -12,7 +12,8 @@
     "underscore": "~1.4.4",
     "amqp": "~0.1.6",
     "winston": "~0.7.1",
-    "uuid": "~1.4.1"
+    "uuid": "~1.4.1",
+    "deferred": "~0.6.3"
   },
   "devDependencies": {
     "mocha": "~1.9.0",
