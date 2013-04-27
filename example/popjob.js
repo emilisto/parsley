@@ -1,6 +1,6 @@
 var Parsley = require('..')
 
-var mq = new Parsley.MessageQueue({
+var mq = new Parsley.DispatchQueue({
   host: 'localhost',
   port: 16379
 });

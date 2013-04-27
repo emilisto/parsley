@@ -14,7 +14,8 @@
     "winston": "~0.7.1",
     "uuid": "~1.4.1",
     "deferred": "~0.6.3",
-    "eventemitter2": "~0.4.11"
+    "eventemitter2": "~0.4.11",
+    "optimist": "~0.4.0"
   },
   "devDependencies": {
     "mocha": "~1.9.0",
