@@ -5,7 +5,7 @@ var mq = new Parsley.MessageQueue({
   port: 16379
 });
 
-mq.ready(function() {
+mq.listen(function(message) {
 
   mq.pop(function(err, dispatch) {
 
@@ -15,12 +15,28 @@ mq.ready(function() {
     var ret = action.run();
     console.log('ret: ', ret);
 
-    setTimeout(function() {
-      mq.end();
-    }, 1000);
-
   });
 
 });
+
+//mq.on('ready', function() {
+  //console.log('meeep');
+  //return;
+
+  //mq.pop(function(err, dispatch) {
+
+    //if(!dispatch) throw new Error("no job available");
+
+    //var action = dispatch.action;
+    //var ret = action.run();
+    //console.log('ret: ', ret);
+
+    //setTimeout(function() {
+      //mq.end();
+    //}, 1000);
+
+  //});
+
+//});
 
 

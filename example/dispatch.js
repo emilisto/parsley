@@ -1,7 +1,10 @@
 var Parsley = require('..')
 
-var sampleTask = new Parsley.Task(function test(val) {
-  return val * 2;
+var sampleTask = new Parsley.Task(function test(val, second) {
+  var _ = require('underscore');
+  console.log(_.uniqueId());
+  console.log(second);
+  return val * 4 + 1;
 });
 
 var mq = new Parsley.MessageQueue({
@@ -9,10 +12,10 @@ var mq = new Parsley.MessageQueue({
   port: 16379
 });
 
-var action = new Parsley.Action(sampleTask, 12);
+var action = new Parsley.Action(sampleTask, 12, 'hejhej');
 var dispatch = mq.dispatch(action);
 
-mq.ready(function() {
+mq.on('ready', function() {
   mq.end();
 });
 
