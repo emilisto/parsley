@@ -17,8 +17,8 @@ module.exports = {
     var deserializedTask = Parsley.Task.deserialize(serializedData);
 
     assert.equal(
-      (new Parsley.Action(task)).run(10),
-      (new Parsley.Action(deserializedTask)).run(10)
+      task.run(10),
+      deserializedTask.run(10)
     );
   }
 
