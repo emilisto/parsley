@@ -6,10 +6,7 @@ var mq = new Parsley.CommandQueue();
 mq.listen();
 
 mq.on('ready', function() {
-
   mq.on('command', function(id) {
-
-    console.log('-- got one: %s', id);
 
     // Here, make a decision if we want to pick it up or not, depending on how
     // many jobs we already have.
@@ -18,5 +15,4 @@ mq.on('ready', function() {
     });
 
   });
-
 });
