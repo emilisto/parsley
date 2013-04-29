@@ -5,6 +5,7 @@ Parsley.config.redis = {
 };
 
 var task = new Parsley.Task(function(arg) {
+  console.log('im the task biatch: ', arguments);
   var limit = Math.random() * 10e7 | 0;
   for(var i = 0; i < limit; i++)
     ;
@@ -23,9 +24,11 @@ command.link(function() {
   console.log('moooore');
 });
 
-command.save(function() {
-  Parsley.Command.fetch(command.id, function(err, command) {
-    console.log(command.callbacks);
-    console.log(command.serialize());
-  });
-});
+var cq = new Parsley.CommandQueue();
+cq.enqueue(command);
+
+//command.save(function() {
+  //Parsley.Command.fetch(command.id, function(err, command) {
+    //command.run();
+  //});
+//});
