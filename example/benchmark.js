@@ -1,10 +1,6 @@
 var Parsley = require('..')
 ;
 
-var parsley = new Parsley();
-console.log(parsley.Task);
-process.exit();
-
 Parsley.config.redis = { host: 'localhost', port: 16379 };
 
 var command = new Parsley.Command(function(arg) {
@@ -15,5 +11,5 @@ var startTime = +new Date;
 command.dispatch().get(function() {
   var delta = +new Date - startTime;
   console.log('Runtime: %d ms', delta);
-  process.exit();
+  Parsley.end();
 });
