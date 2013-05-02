@@ -25,9 +25,10 @@ command.link(function() {
 });
 
 var result = command.dispatch();
-//result.get(function() {
-  //console.log('results!');
-//});
+result.get(function(err, result) {
+  console.log('results:');
+  console.log(result);
+});
 
 //var cq = new Parsley.CommandQueue();
 //cq.enqueue(command);
