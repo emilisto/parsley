@@ -7,8 +7,8 @@ Parsley.config.redis = {
 var task = new Parsley.Task(function(arg) {
   console.log('im the task biatch: ', arguments);
   var limit = Math.random() * 10e7 | 0;
-  for(var i = 0; i < limit; i++)
-    ;
+  //for(var i = 0; i < limit; i++)
+    //;
   return limit;
 });
 
@@ -18,11 +18,12 @@ var task = new Parsley.Task(function(arg) {
 //console.log(data);
 //console.log(JSON.parse(JSON.stringify(data)));
 
-
-var command = new Parsley.Command(task, 'this is an argument', 123);
-command.link(function() {
+var command2 = new Parsley.Command(function() {
   console.log('moooore');
 });
+
+var command = new Parsley.Command(task, 'this is an argument', 123);
+command.link(command2);
 
 var result = command.dispatch();
 result.get(function(err, result) {
