@@ -24,8 +24,13 @@ command.link(function() {
   console.log('moooore');
 });
 
-var cq = new Parsley.CommandQueue();
-cq.enqueue(command);
+var result = command.dispatch();
+//result.get(function() {
+  //console.log('results!');
+//});
+
+//var cq = new Parsley.CommandQueue();
+//cq.enqueue(command);
 
 //command.save(function() {
   //Parsley.Command.fetch(command.id, function(err, command) {

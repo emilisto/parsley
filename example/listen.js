@@ -11,7 +11,7 @@ mq.on('ready', function() {
     // Here, make a decision if we want to pick it up or not, depending on how
     // many jobs we already have.
     mq.dequeue(id, function(err, command) {
-      command.run();
+      if(command) command.run();
     });
 
   });
