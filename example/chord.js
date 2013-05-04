@@ -34,11 +34,14 @@ commandset.link(function() {
   console.log('all tasks finished');
   console.log(arguments);
 });
-commandset.save();
+commandset.save(function() {
+  console.log('saved it:');
+  console.log(arguments);
+  launchParallel(commands);
+});
 
 // Alright, now we launch these commands in different ways
 
-launchParallel(commands);
 //launchSerial(commands);
 
 //process.exit();
