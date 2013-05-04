@@ -22,7 +22,7 @@ var makeCommand = function(i) {
     return "return from task " + i;
   }, i);
 };
-var commands = _(5).times(makeCommand);
+var commands = _(100).times(makeCommand);
 
 var finalCommand = new Command(function() {
   console.log('all tasks finished');
