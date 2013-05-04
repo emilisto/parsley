@@ -17,8 +17,8 @@ var commands = _(4).times(makeCommand);
 
 new Parsley.Canvas.Chord(commands)
   .dispatch()
-  .get(function() {
-    console.log('chord results:');
-    console.log(arguments);
+  .get(function(err, result) {
+    console.log('chord finished, results of each command:');
+    console.log(result);
   });
 

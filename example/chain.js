@@ -17,9 +17,8 @@ var commands = _(4).times(makeCommand);
 
 new Parsley.Canvas.Chain(commands)
   .dispatch()
-  .get(function() {
-    console.log('chain results:');
-    console.log(arguments);
+  .get(function(err, result) {
+    console.log('chain finished, result of last command was:');
+    console.log(result);
   });
-
 
