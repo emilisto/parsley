@@ -15,29 +15,30 @@ var launchSerial = function(commands) {
 
 };
 
-var commands = _.map([
-  function() {
-    return "ret task 1";
-  },
-  function() {
-    return "ret task 2";
-  },
-  function() {
-    return "ret task 3";
-  }
-], function(fn) {
-  return new Parsley.Command(fn);
-});
+var makeCommand = function(i) {
+  return new Parsley.Command(function(i) {
+    var n = Math.random() * 10e8;
+    for(var j = 0; j < n; j++);
+    return "return from task " + i;
+  }, i);
+};
+var commands = _(5).times(makeCommand);
 
-var commandset = new Parsley.CommandSet(commands);
-commandset.link(function() {
+var finalCommand = new Command(function() {
   console.log('all tasks finished');
   console.log(arguments);
+  return 'coool';
 });
-commandset.save(function() {
-  console.log('saved it:');
-  console.log(arguments);
-  launchParallel(commands);
+
+var commandset = new Parsley.CommandSet(commands)
+  .link(finalCommand)
+  .save(function() {
+    launchParallel(commands);
+  });
+
+finalCommand.get(function(err, ret) {
+  console.log('finished!!!');
+  console.log(ret);
 });
 
 // Alright, now we launch these commands in different ways
