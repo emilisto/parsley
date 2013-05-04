@@ -17,12 +17,12 @@ var launchSerial = function(commands) {
 
 var makeCommand = function(i) {
   return new Parsley.Command(function(i) {
-    var n = Math.random() * 10e8;
+    var n = Math.random() * 10e7;
     for(var j = 0; j < n; j++);
     return "return from task " + i;
   }, i);
 };
-var commands = _(5).times(makeCommand);
+var commands = _(20).times(makeCommand);
 
 var finalCommand = new Command(function() {
   console.log('all tasks finished');
