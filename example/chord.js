@@ -1,10 +1,19 @@
+var _ = require('underscore');
 var Parsley = require('..');
 
 Parsley.config.redis = {
   host: 'localhost', port: 16379
 };
 
-var chord = new Parsley.Canvas.BaseChord([
+var launchParallel = function(commands) {
+
+};
+
+var launchSerial = function(commands) {
+
+};
+
+var commands = _.map([
   function() {
     return "ret task 1";
   },
@@ -14,17 +23,26 @@ var chord = new Parsley.Canvas.BaseChord([
   function() {
     return "ret task 3";
   }
-]).link(function() {
+], function(fn) {
+  return new Parsley.Command(fn);
+});
+
+var commandset = new Parsley.CommandSet(commands);
+commandset.link(function() {
   console.log('all tasks finished');
   console.log(arguments);
 });
+commandset.save();
 
-console.log(chord.serialize());
-process.exit();
+// Alright, now we launch these commands in different ways
 
-var result = chord.dispatch();
-result.get(function() {
-  console.log('results from all child commands');
-  console.log(arguments);
-});
+launchParallel(commands);
+//launchSerial(commands);
+
+//process.exit();
+//var result = chord.dispatch();
+//result.get(function() {
+  //console.log('results from all child commands');
+  //console.log(arguments);
+//});
 
