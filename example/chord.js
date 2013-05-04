@@ -22,12 +22,11 @@ var makeCommand = function(i) {
     return "return from task " + i;
   }, i);
 };
-var commands = _(100).times(makeCommand);
 
-var finalCommand = new Command(function() {
-  console.log('all tasks finished');
-  console.log(arguments);
-  return 'coool';
+var commands = _(4).times(makeCommand);
+
+var finalCommand = new Command(function(results) {
+  return results;
 });
 
 var commandset = new Parsley.CommandSet(commands)
