@@ -1,6 +1,5 @@
 var _ = require('underscore');
-var Parsley = require('..'),
-    Group = Parsley.Canvas.Group;
+var Parsley = require('..');
 
 Parsley.config.redis = {
   host: 'localhost', port: 16379
@@ -16,13 +15,11 @@ var makeCommand = function(i) {
 
 var commands = _(4).times(makeCommand);
 
-var chain = new Group(commands)
-  .link(function() {
-    console.log('results!');
-    console.log(arguments);
-  })
+new Parsley.Canvas.Chain(commands)
   .dispatch()
   .get(function() {
-    console.log('group finished:');
+    console.log('chain results:');
     console.log(arguments);
   });
+
+

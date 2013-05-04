@@ -5,48 +5,20 @@ Parsley.config.redis = {
   host: 'localhost', port: 16379
 };
 
-var launchParallel = function(commands) {
-  _.each(commands, function(command) {
-    command.dispatch();
-  });
-};
-
-var launchSerial = function(commands) {
-
-};
-
 var makeCommand = function(i) {
   return new Parsley.Command(function(i) {
-    var n = Math.random() * 10e6;
+    var n = Math.random() * 10e7;
     for(var j = 0; j < n; j++);
-    return "return from task " + i;
+    return "return from task " + i + "random number" + new String(n | 0);
   }, i);
 };
 
 var commands = _(4).times(makeCommand);
 
-var commandset = new Parsley.CommandSet(commands)
-  .get(function(err, results) {
-    console.log('results!');
-    console.log(results);
-  })
-  .save(function() {
-    launchParallel(commands);
-  })
-
-//finalCommand.get(function(err, ret) {
-  //console.log('finished!!!');
-  //console.log(ret);
-//});
-
-// Alright, now we launch these commands in different ways
-
-//launchSerial(commands);
-
-//process.exit();
-//var result = chord.dispatch();
-//result.get(function() {
-  //console.log('results from all child commands');
-  //console.log(arguments);
-//});
+new Parsley.Canvas.Chord(commands)
+  .dispatch()
+  .get(function() {
+    console.log('chord results:');
+    console.log(arguments);
+  });
 
