@@ -6,7 +6,9 @@ Parsley.config.redis = {
 };
 
 var launchParallel = function(commands) {
-
+  _.each(commands, function(command) {
+    command.dispatch();
+  });
 };
 
 var launchSerial = function(commands) {
