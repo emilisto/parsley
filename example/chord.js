@@ -10,7 +10,7 @@ var chord = new Parsley.Canvas.BaseChord([
   },
   function() {
     return "ret task 2";
-  }
+  },
   function() {
     return "ret task 3";
   }
@@ -18,6 +18,9 @@ var chord = new Parsley.Canvas.BaseChord([
   console.log('all tasks finished');
   console.log(arguments);
 });
+
+console.log(chord.serialize());
+process.exit();
 
 var result = chord.dispatch();
 result.get(function() {
