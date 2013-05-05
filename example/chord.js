@@ -13,7 +13,7 @@ var makeCommand = function(i) {
   }, i);
 };
 
-var commands = _(4).times(makeCommand);
+var commands = _(40).times(makeCommand);
 
 new Parsley.Canvas.Chord(commands)
   .dispatch()
