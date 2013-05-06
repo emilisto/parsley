@@ -6,10 +6,13 @@ Parsley.config.redis = {
 };
 
 var makeCommand = function(i) {
-  return new Parsley.Command(function(i) {
+  return new Parsley.Command(function(callback, i) {
+
     var n = Math.random() * 10e7;
     for(var j = 0; j < n; j++);
-    return "return from task " + i + "random number" + new String(n | 0);
+
+    callback(null, "return from task " + i + "random number" + new String(n | 0));
+
   }, i);
 };
 
