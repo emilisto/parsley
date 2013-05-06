@@ -3,7 +3,7 @@ var Parsley = require('..');
 
 Parsley.config.redis = { port: 16379 };
 
-new Parsley.Command(function() {
+var command = new Parsley.Command(function() {
 
   var util = require('util');
   function CustomError() {};
