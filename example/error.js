@@ -10,9 +10,9 @@ var command = new Parsley.Command(function() {
   util.inherits(Error, CustomError);
 
   throw new CustomError('task is colaaaaaaaaaaapsing');
+
 }).dispatch().get(function(err, result) {
   console.log('synchronous results is synchronous:', err);
   console.log(err.type);
 });
-
 
