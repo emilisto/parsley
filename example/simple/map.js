@@ -2,14 +2,14 @@ var Parsley = require('../..');
 
 Parsley.config.redis = { port: 16379 };
 
-var fn = new Parsley.Command(function() {
-  return 'Im some kind of result';
+var multiplyByEight = new Parsley.Command(function(i) {
+  return i * 8;
 });
 
 new Parsley.Command(function() {
-  return "im from the initiating task";
+  return [ 1, 2, 3];
 })
-  .link(new Parsley.Canvas.ChordMap(fn))
+  .link(new Parsley.Canvas.ChordMap(multiplyByEight))
   .dispatch();
 
 
