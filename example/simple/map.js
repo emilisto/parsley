@@ -12,4 +12,11 @@ new Parsley.Command(function() {
   .link(new Parsley.Canvas.ChordMap(multiplyByEight))
   .dispatch();
 
+// Future
+//new Parsley.Command(function() {
+  //return [ 1, 2, 3];
+//})
+  //.link(new Parsley.Canvas.ChordMap(multiplyByEight))
+  //.dispatch();
+
 
