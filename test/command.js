@@ -9,7 +9,7 @@ Parsley.Logging.config.transports = {
 
 module.exports = {
 
-  'serializing and deserializing yields the same function': function() {
-  }
+  // TODO: Add more unit test-style tests here, that don't require a running
+  // Parsley worker, and in turn a Redis instance.
 
 };
