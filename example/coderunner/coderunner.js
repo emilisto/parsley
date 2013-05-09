@@ -37,7 +37,9 @@ CodeRunner.prototype.run = function(code, args) {
 
   var command = new tasks.identifyDependencies(code);
 
-  var command = new Parsley.Command(code);
+  var command = new Parsley.Canvas.Chain([
+    new Command(tasks.identifyDependencies, src)
+  ]);
   command.addArguments(args);
   return command.dispatch();
 
