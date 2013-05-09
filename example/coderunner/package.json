@@ -1,0 +1,16 @@
+{
+  "name": "coderunner",
+  "version": "0.0.0",
+  "description": "Sample library for running arbitrary pieces of code remotely using Parsley",
+  "main": "bin/coderunner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "optimist": "~0.4.0",
+    "detective": "~2.1.1"
+  }
+}
