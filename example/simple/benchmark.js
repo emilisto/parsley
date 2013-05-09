@@ -1,4 +1,4 @@
-var Parsley = require('..')
+var Parsley = require('../..')
 ;
 
 Parsley.config.redis = { host: 'localhost', port: 16379 };

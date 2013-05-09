@@ -1,4 +1,4 @@
-var Parsley = require('..')
+var Parsley = require('../..')
 
 var sampleTask = new Parsley.Task(function test(val, second) {
   var _ = require('underscore');

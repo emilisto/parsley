@@ -1,4 +1,4 @@
-var Parsley = require('..')
+var Parsley = require('../..')
 
 var sampleFn = function test(val) {
   return val * 2;

@@ -4,7 +4,7 @@
  */
 
 var _ = require('underscore');
-var Parsley = require('..');
+var Parsley = require('../..');
 
 Parsley.config.redis = { port: 16379 };
 
