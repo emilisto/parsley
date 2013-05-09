@@ -1,25 +1,11 @@
-var Parsley = require('../..')
+var Parsley = require('../..');
 
-var sampleFn = function test(val) {
-  return val * 2;
-};
+Parsley.config.redis = { port: 16379 };
 
-var callIt = function(fn) {
-  return fn(10);
-}
+new Parsley.Command(function() {
+  return 'Im some kind of result';
+}).dispatch() .get(function(err, result) {
+  console.log('task result:', result);
+});
 
-
-var sampleTask = new Parsley.Task(sampleFn);
-
-console.log(String(sampleTask));
-var json = sampleTask.serialize();
-
-var task = Parsley.Task.deserialize(json);
-
-var valBefore = callIt(sampleFn);
-console.log('Before: ', valBefore);
-console.log('After: ', task.fn(10));
-
-//var action = new Parsley.Action(sampleTask, 123);
-//action.run();
 
