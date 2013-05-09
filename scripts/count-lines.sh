@@ -2,5 +2,5 @@
 
 basedir=$(dirname $0)/..
 
-wc -l $(find $basedir/{tmp,example,lib} -name "*.js" | xargs)
+wc -l $(find $basedir -name "*.js" | grep -v node_modules | xargs)
 
