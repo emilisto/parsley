@@ -35,6 +35,20 @@ module.exports = {
       var before = data;
       var after = serializer.deserialize(serializer.serialize(before));
       assert.deepEqual(before, after);
+    },
+    'exceptions can be serialized': function() {
+      var serializer = new Serializer({ 'error': 'exception'});
+
+      var message = 'I am the message, hoho';
+      try {
+        throw new Error(mssage);
+      } catch(e) {
+        var serialized = serializer.serialize({ error: e });
+        assert.deepEqual(serialize, {
+          'type': 'Error',
+          'message': message
+        });
+      }
     }
   }
 };

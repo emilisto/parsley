@@ -21,4 +21,3 @@ new Parsley.Canvas.Chord(commands)
     console.log('chord finished, results of each command:');
     console.log(result);
   });
-

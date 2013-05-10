@@ -38,6 +38,7 @@ module.exports = {
       new Parsley.Command(toUpperCase, str)
         .dispatch() 
         .get(function(err, result) {
+          assert(!err, 'error should be null for a successful task');
           assert(result === toUpperCase(str), 'we should get the same result as when executing the function locally');
           done();
         });
