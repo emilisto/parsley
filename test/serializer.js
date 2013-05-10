@@ -41,10 +41,10 @@ module.exports = {
 
       var message = 'I am the message, hoho';
       try {
-        throw new Error(mssage);
+        throw new Error(message);
       } catch(e) {
         var serialized = serializer.serialize({ error: e });
-        assert.deepEqual(serialize, {
+        assert.deepEqual(JSON.parse(serialized.error), {
           'type': 'Error',
           'message': message
         });
