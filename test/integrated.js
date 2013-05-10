@@ -1,3 +1,17 @@
+/*
+ * Integrated tests
+ *
+ * These require a working redis server. Parsley is heavily written around
+ * redis, and so testing it without a redis server would be difficult and more
+ * importantly not give any real indiciation of whether it works or not. I
+ * can't see us abstracting the redis parts away either, sincw we rely on
+ * pieces of Lua being run in redis, which one could not mock without
+ * implementing a complete Redis server.
+ *
+ * IMPORTANT: Currently, to run these tests you need a Parsley worker running,
+ * see the FIXME right after module.exports.
+ */
+
 var _ = require('underscore')
   , Parsley = require('..')
   , assert = require('chai').assert
@@ -8,8 +22,6 @@ Parsley.Logging.config.transports = {
   console: { level: 'error' }
 };
 
-var worker;
-
 // Dump example command for testing
 var makeTripleCommand = function(i) {
   return new Parsley.Command(function(i) {
@@ -19,13 +31,10 @@ var makeTripleCommand = function(i) {
 
 module.exports = {
 
-  // FIXME: if we run the Parsley worker in the same process, the Redis pub/sub
-  // doesn't seem to work.
-
+  // FIXME: if we run the Parsley worker in the same process strange things happen.
   //before: function() { this.worker = new Parsley.Worker(); },
   //beforeEach: function() { this.worker.start(); },
   //afterEach: function() { this.worker.end(); },
-
 
   'Parsley Basics': {
 
