@@ -19,7 +19,7 @@ try {
   var startTime = +new Date;
 
   new CodeRunner({ redisPort: 16379 })
-    .run(code, [ "and, coooooool" ])
+    .run(code, [ 123 ])
     .get(function(err, result) {
 
       var delta = +new Date - startTime;
