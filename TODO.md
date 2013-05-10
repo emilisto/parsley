@@ -1,6 +1,12 @@
 # Small things
 
-- [ ] Make the command able to save themselves instead
-- [ ] Use a hash instead of a plain string
-- [ ] Start using redis all over and not just in CommandQueue -
-      sacrifice speed for encapsulation.
+- Print execution time in logs
+- Have workers ping a master process every N seconds, kill them if they
+  miss a ping.
+- Clean up old keys in redis (TTL?)
+- Run in sandbox
+- Capture stdout in sandbox
+- Support module.exports format
+- Support writing code just as it its
+- Send whole stack trace in error
+- Make the whole chain fail if one task fails
