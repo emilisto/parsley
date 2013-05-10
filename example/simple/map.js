@@ -6,35 +6,22 @@ var multiplyByEight = new Parsley.Command(function(i) {
   return i * 8;
 });
 
-
-//new Parsley.Canvas.ChordMap(multiplyByEight)
-  //.dispatch([1, 2, 3])
-  //.get(function(err, result) {
-    //console.log('result');
-    //console.log(result);
-  //});
-
-
-var chordCommand = new Parsley.Canvas.ChordMap(multiplyByEight);
 var command = new Parsley.Canvas.Chain([
   new Parsley.Command(function() {
     return [ 1, 2, 3];
   }),
-  chordCommand
+  new Parsley.Command(function(result) { return result; }),
+  new Parsley.Canvas.ChordMap(multiplyByEight),
+  new Parsley.Command(function(result) {
+    var unary = function(fn) {
+      return function(arg) { return fn(arg); };
+    };
+    return _.map(result, unary(parseInt));
+  })
 ]).dispatch();
 
-console.log(command.id);
-chordCommand.get(function() {
-  console.log('coollers');
-  console.log(arguments);
+command.get(function(err, result) {
+  console.log('Result of multiplications:');
+  console.log(result);
 });
-
-
-// Future
-//new Parsley.Command(function() {
-  //return [ 1, 2, 3];
-//})
-  //.link(new Parsley.Canvas.ChordMap(multiplyByEight))
-  //.dispatch();
-
 
