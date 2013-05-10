@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+var _ = require('underscore');
+var redis = require('..').redis;
+var args = require('optimist').argv._;
+var prettyjson = require('prettyjson');
+
+
+var id = args[0]; 
+if(!id) throw new Error('must give an id');
+
+var lua = '\
+  local keys = redis.call("KEYS", "*"..KEYS[1].."*") \
+  local ret = {} \
+  for i, key in ipairs(keys) do \
+    local _ret = redis.call("HGETALL", key) \
+    _ret[#_ret+1] = "key" \
+    _ret[#_ret+1] = key \
+    ret[#ret+1] = _ret \
+  end \
+  return ret \
+';
+
+
+var r = redis.get();
+r.eval(lua, 1, [ id ], function(err, data) {
+  data = _.map(data, redis.replyToObject);
+  console.log(prettyjson.render(data));
+  r.end();
+})
