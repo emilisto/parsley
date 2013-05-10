@@ -16,11 +16,21 @@ try {
   var path = optimist.argv._.pop();
   var code = fs.readFileSync(path).toString();
 
+  var startTime = +new Date;
+
   new CodeRunner({ redisPort: 16379 })
     .run(code, [ "and, coooooool" ])
     .get(function(err, result) {
-      console.log('got it!');
-      console.log(arguments);
+
+      var delta = +new Date - startTime;
+      console.log('Runtime: %d ms', delta);
+
+      if(err) {
+        console.log('FAILED: %s', err);
+      } else {
+        console.log('SUCCEEDED: %s', result);
+      }
+
     });
 
 } catch(e) {

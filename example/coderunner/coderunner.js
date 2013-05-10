@@ -12,37 +12,45 @@ var CodeRunner = function(options) {
 
 var tasks = {
   installDependency: function(callback, dependency) {
-    console.log('installing dependency: ');
-    callback();
+
+    console.log('INSTALLING dependency: ', dependency);
+
+    setTimeout(function() {
+      for(var i = 0; i < 10e7; i++);
+      callback();
+    }, 20);
   },
 
   identifyDependencies: function(src) {
-    return [ 'underscore', 'coollib' ];
+    console.log('Identifying dependencies...');
+    return [
+      'underscore', 'coollib', 'winston', 'prettyprint', 'http', 'socketio',
+      'backbone', 'amazon-aws', 'parsley', 'node_redis'
+    ];
   },
 
-  run: function(callback, src, vm) {
+  run: function(callback, src) {
+    console.log(arguments);
     // Asynchronous result - a promise basically
-    var result = new Parsley.DeferredResult();
 
     setTimeout(function() {
-      result.resolve('i am the output');
-    }, 1000)
-
-    return result;
+      callback(null, "I am the code generated.");
+    }, 0);
   }
 
 };
 
 CodeRunner.prototype.run = function(code, args) {
 
-  var command = new tasks.identifyDependencies(code);
-
   var command = new Parsley.Canvas.Chain([
-    new Command(tasks.identifyDependencies, src)
+    new Parsley.Command(tasks.identifyDependencies, code),
+    new Parsley.Canvas.ChordMap(tasks.installDependency),
+    new Parsley.Command(tasks.run, code, args)
   ]);
-  command.addArguments(args);
-  return command.dispatch();
 
+  var result = command.dispatch();
+  result.get(Parsley.end);
+  return result;
 };
 
 module.exports = CodeRunner;
