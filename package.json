@@ -16,7 +16,9 @@
     "deferred": "~0.6.3",
     "eventemitter2": "~0.4.11",
     "optimist": "~0.4.0",
-    "introspect": "0.0.2"
+    "introspect": "0.0.2",
+    "prettyjson": "~0.8.1",
+    "naught": "~0.4.3"
   },
   "devDependencies": {
     "mocha": "~1.9.0",
