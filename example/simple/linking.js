@@ -3,8 +3,6 @@ var Parsley = require('../..');
 Parsley.config.redis = { port: 16379 };
 
 var multiplyByEight = new Parsley.Command(function(i) {
-  console.log('multiplyByEight');
-  console.log(arguments);
   return i * 8;
 });
 

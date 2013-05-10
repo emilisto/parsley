@@ -7,27 +7,27 @@ var multiplyByEight = new Parsley.Command(function(i) {
 });
 
 
-new Parsley.Canvas.ChordMap(multiplyByEight)
-  .dispatch([1, 2, 3])
-  .get(function(err, result) {
-    console.log('result');
-    console.log(arguments);
-  });
+//new Parsley.Canvas.ChordMap(multiplyByEight)
+  //.dispatch([1, 2, 3])
+  //.get(function(err, result) {
+    //console.log('result');
+    //console.log(result);
+  //});
 
 
-//var chordCommand = new Parsley.Canvas.ChordMap(multiplyByEight);
-//var command = new Parsley.Canvas.Chain([
-  //new Parsley.Command(function() {
-    //return [ 1, 2, 3];
-  //}),
-  //chordCommand
-//]).dispatch();
+var chordCommand = new Parsley.Canvas.ChordMap(multiplyByEight);
+var command = new Parsley.Canvas.Chain([
+  new Parsley.Command(function() {
+    return [ 1, 2, 3];
+  }),
+  chordCommand
+]).dispatch();
 
-//console.log(command.id);
-//chordCommand.get(function() {
-  //console.log('coollers');
-  //console.log(arguments);
-//});
+console.log(command.id);
+chordCommand.get(function() {
+  console.log('coollers');
+  console.log(arguments);
+});
 
 
 // Future

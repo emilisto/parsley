@@ -101,20 +101,58 @@ module.exports = {
         assert(result === 'Im the master of my worker.');
         done();
       });
+    },
+
+    'linking of tasks': function(done) {
+      var command1 = new Parsley.Command(function(initial) { return initial + 123; }),
+          command2 = new Parsley.Command(function(res) { return res + 5; }),
+          command3 = new Parsley.Command(function(res) { return res + 10; });
+
+      command1.link(command2);
+      command2.link(command3);
+      command1.dispatch(15);
+
+      command3.get(function(err, result) {
+        assert(result === (15 + 123 + 5 + 10), 'result is passed from each finished command to the next');
+        done();
+      });
+
+    },
+
+    'linking of commandset': function(done) {
+
+      var commands = [
+        new Parsley.Command(function(initial) { return initial + 10; }),
+        new Parsley.Command(function(initial) { return initial + 15; })
+      ];
+
+      var commandset = new Parsley.CommandSet(commands);
+
+      var resultCommand = new Parsley.Command(function(result) { return result; });
+      commandset.link(resultCommand);
+      commandset.save();
+      _.invoke(commands, 'dispatch', 20);
+
+      resultCommand.get(function(err, result) {
+        result = _.map(result, parseInt);
+        assert.deepEqual(result, [ 20 + 10, 20 + 15 ]);
+        done();
+      });
+
     }
 
   },
 
   'Parsley Canvas': {
 
-    'Chain': function(done) {
+    'Basic Chain': function(done) {
       var commands = _(3).times(makeTripleCommand);
       new Parsley.Canvas.Chain(commands)
-        .dispatch()
-        .get(function(err, result) {
-          assert(result === 6, 'chain only returns the result of the last command');
-          done();
-        });
+      .dispatch()
+      .get(function(err, result) {
+        assert(result === 6, 'chain only returns the result of the last command');
+        done();
+      });
     },
 
     'Chord': function(done) {
@@ -138,6 +176,25 @@ module.exports = {
           assert(!result, "group should not return anything - it's just dispatched into oblivion");
           done();
         });
+    },
+
+    'Linked Chord': function(done) {
+      var multiplyByEight = new Parsley.Command(function(i) {
+        return i * 8;
+      });
+
+      var linked = new Command(function(result) {
+        return result;
+      });
+
+      var command = new Parsley.Canvas.Chord([ multiplyByEight ])
+      command.link(linked);
+      command.dispatch(3);
+
+      command.get(function(err, result) {
+        assert(parseInt(_.values(result)[0]) === 3 * 8);
+        done();
+      });
     }
   }
 
