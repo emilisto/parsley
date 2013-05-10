@@ -76,6 +76,22 @@ module.exports = {
         done();
       });
 
+    },
+
+    'the Parsley object is accessible and usable from within tasks': function(done) {
+      new Parsley.Command(function simple(callback) {
+
+        // Parsley is available in this.Parsley
+
+        var command = new this.Parsley.Command(function() {
+          // Note that this command is created and dispatched from a command itself.
+          return 'Im the master of my worker.';
+        }).dispatch().get(callback);
+
+      }).dispatch().get(function(err, result) {
+        assert(result === 'Im the master of my worker.');
+        done();
+      });
     }
 
   },
