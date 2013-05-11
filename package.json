@@ -10,17 +10,18 @@
   "dependencies": {
     "colors": "~0.6.0-1",
     "underscore": "~1.4.4",
-    "amqp": "~0.1.6",
     "winston": "~0.7.1",
     "uuid": "~1.4.1",
     "deferred": "~0.6.3",
     "eventemitter2": "~0.4.11",
     "optimist": "~0.4.0",
     "introspect": "0.0.2",
-    "prettyjson": "~0.8.1",
-    "naught": "~0.4.3"
+    "naught": "~0.4.3",
+    "optimist": "~0.4.0",
+    "detective": "~2.1.1"
   },
   "devDependencies": {
+    "prettyjson": "~0.8.1",
     "mocha": "~1.9.0",
     "chai": "~1.5.0"
   },

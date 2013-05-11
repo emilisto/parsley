@@ -1,4 +1,4 @@
-var Parsley = require('../..');
+var Parsley = require('parsley');
 
 var argumentsToArray = function(args) { return Array.prototype.slice.call(args); };
 

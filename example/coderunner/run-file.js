@@ -1,7 +1,5 @@
-#!/usr/bin/env node
-
+var CodeRunner = require('parsley/contrib/coderunner');
 var fs = require('fs');
-var CodeRunner = require('../coderunner');
 var optimist = require('optimist')
   .usage('Usage: $0 <path-to-script>');
 
@@ -36,5 +34,3 @@ try {
 } catch(e) {
   fail(e);
 }
-
-

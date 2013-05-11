@@ -10,3 +10,4 @@
 - Support writing code just as it its
 - Send whole stack trace in error
 - Make the whole chain fail if one task fails
+
