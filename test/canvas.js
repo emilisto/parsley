@@ -114,7 +114,26 @@ module.exports = {
           done();
         });
 
+    },
+
+    'Failing chain': function(done) {
+      var command = Parsley.Canvas.Chain([
+        function() { return 'okay' },
+        // Failing task
+        function() {
+          fsads();
+        },
+        function() {
+          return 'okay task';
+        }
+      ]);
+
+      command.dispatch().get(function(err, reslt) {
+        console.log('got it');
+        console.log(arguments);
+      });
     }
+
   }
 
 };

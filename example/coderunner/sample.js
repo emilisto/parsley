@@ -1,7 +1,11 @@
-function(arg) {
-  var _ = require('underscore');
-  var util = require('util');
+function fn(callback) {
 
-  var n = Math.random() * 1000 | 0;
-  return [ "I am a program, that Katie likes.", n ].join(' ');
-};
+  var request = require('request');
+  request('http://myhostname.net', {
+    'headers': { 'user-agent': 'curl' }
+  }, function (error, response, body) {
+    console.log(body);
+    callback(null, body);
+  })
+
+}
