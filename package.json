@@ -17,8 +17,8 @@
     "optimist": "~0.4.0",
     "introspect": "0.0.2",
     "naught": "~0.4.3",
-    "optimist": "~0.4.0",
-    "detective": "~2.1.1"
+    "detective": "~2.1.1",
+    "redis": "~0.8.3"
   },
   "devDependencies": {
     "prettyjson": "~0.8.1",
